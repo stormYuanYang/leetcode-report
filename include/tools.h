@@ -126,7 +126,4 @@ void println(const auto A, size_t size1, size_t size2) {
     print(A, size1, size2);
 }
 
-void println(const vector<const vector<auto>>& A) {
-    print(A);
-} 
 #endif // tools_h

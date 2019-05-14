@@ -66,14 +66,8 @@ int main() {
     freopen("in", "r", stdin);
 #endif
     Solution sol;
-    int N;
-    while (scanf("%d", &N) != EOF) {
-        assert(N > 0);
-        vector<vector<char>> A(N);
-        for (int i = 0; i < N; ++i) {
-            scanf("%d", &A[i]);
-        }
-        println(sol.numRookCaptures(A));
-    }
+    int N, M;
+    vector<vector<char>> A;
+    println(sol.numRookCaptures(A));
     return 0;
 }

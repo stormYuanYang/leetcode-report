@@ -90,7 +90,25 @@ public:
         return nums[halfSize];
     }
 
-    int majorityElement_2(vector<int>& nums) {
+    // 采用boyer-moore majority vote algorithm 即博伊尔-摩尔投票算法
+    // 只需要遍历一次数组即可，不需要额外的存储空间
+    // 时间复杂度O(n)，空间复杂度O(1)
+    int majorityElement_BoyerMooreMajorityVote(vector<int>& nums) {
+        const size_t LEN = nums.size();
+        int majority = nums[0];
+        int count = 1;
+        // 如果众数存在的话，就一定会是majority
+        for (int i = 1; i < LEN; ++i) {
+            if (nums[i] == majority)  {
+                ++count;
+            } 
+            else if (--count < 0) {
+                majority = nums[i];
+                count = 1;
+            }
+            
+        }
+        return majority;
     }
 };
 
@@ -107,7 +125,7 @@ int main() {
         for (int i = 0; i < N; ++i) {
             scanf("%d", &A[i]);
         }
-        println(sol.majorityElement_1(A));
+        println(sol.majorityElement_BoyerMooreMajorityVote(A));
     }
     return 0;
 }

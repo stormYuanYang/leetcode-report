@@ -20,7 +20,7 @@ public:
         for (int i = 0; i < LEN; ++i) {
             if (nums[i] != val) {
                 if (i != ++j) {
-                    swap(nums[i], nums[j]);
+                    nums[i] = nums[j];
                 }
             }
         }
@@ -30,30 +30,23 @@ public:
     // 但是需要处理一些细节，才能正确获取新的长度
     // 代码要更复杂一些
     int removeElement(vector<int>& nums, int val) {
-        if (nums.size() == 0) {
-            return 0;
-        }
-        int i = 0, j = nums.size() - 1;
-        while (i < j) {
-            while (i < j && nums[i] != val) {
-                ++i;
+        int len = nums.size();
+        int i = 0;
+        while (i < len) {
+            // 跳过已经在末尾的val 保证nums[len-1]一定不是val
+            while (len > 0 && nums[len-1] == val) {
+                --len;
             }
-            while (i < j && nums[j] == val) {
-                --j;
-            }
-            if (i == j) {
+            if (i == len) {
                 break;
             }
-            swap(nums[i], nums[j]);
+            if (nums[i] == val) {
+                nums[i] = nums[len-1];
+                --len;
+            } 
             ++i;
-            --j;
         }
-        if (nums[i] == val) {
-            return i;
-        } 
-        else {
-            return i+1;
-        }
+        return len;
     }
 };
 

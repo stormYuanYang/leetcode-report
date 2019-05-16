@@ -7,7 +7,7 @@
 
 class Solution {
 public:
-    int findMaxConsecutiveOnes(vector<int>& nums) {
+    int findMaxConsecutiveOnes_old(vector<int>& nums) {
         const int LEN = nums.size();
         int maxCount = 0;
         int j = 0;
@@ -29,6 +29,26 @@ public:
             if (maxCount < LEN - j) {
                 maxCount = LEN - j;
             }
+        }
+        return maxCount;
+    }
+    // 同样的思路，但是代码实现更简单
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        const int LEN = nums.size();
+        int maxCount = 0, tmpCount = 0;
+        for (int i = 0; i < LEN; ++i) {
+            if (nums[i]) {
+                ++tmpCount;
+            } else {
+                if (maxCount < tmpCount) {
+                    maxCount = tmpCount;
+                }
+                tmpCount = 0;
+            }
+        }
+        // 要注意最后不是以0做连续1结束标记的情况
+        if (maxCount < tmpCount) {
+            maxCount = tmpCount;
         }
         return maxCount;
     }

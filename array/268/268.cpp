@@ -14,7 +14,7 @@ public:
     // 但是其计算是可逆的，从某种意义上来说，又可以说是正确的
     // 对于int32来说，所有的计算都限制在32位之内；
     // 虽然最终的结果值可能不是我们想要的，但是计算过程是可逆的
-    int missingNumber(vector<int>& nums) { 
+    int missingNumber_old(vector<int>& nums) { 
         // 根据高斯求和公式求得下标的和
         const int LEN = nums.size();
         int sum = LEN * (LEN+1) / 2;
@@ -22,6 +22,22 @@ public:
             sum -= nums[i];
         }
         return sum;
+    }
+    
+    // 通过位运算
+    // 两个相同的数字进行异或运算，结果必定是0
+    // 一个数和0异或还是它本身
+    int missingNumber(vector<int>& nums) {
+        const int LEN = nums.size();
+        if (LEN == 0) {
+            throw;
+        }
+        int x = 0;
+        for (int i = 0; i < LEN; ++i) {
+            x ^= nums[i] ^ i;
+        }
+        x ^= LEN;
+        return x;
     }
 };
 
@@ -31,6 +47,15 @@ int main() {
     freopen("in.txt", "r", stdin);
 #endif
     Solution sol;
+    int N;
+    while (scanf("%d", &N) != EOF) {
+        assert(N >= 0);
+        vector<int> A(N);
+        for (int i = 0; i < N; ++i) {
+            scanf("%d", &A[i]);
+        }
+        println(sol.missingNumber(A));
+    }
     return 0;
 }
 /*

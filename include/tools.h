@@ -24,6 +24,8 @@ using namespace std;
  */
 
 // print
+
+
 inline void printLine() {
     putchar('\n');
 }
@@ -53,6 +55,10 @@ inline void print(const string& str) {
     const char* cstr = str.c_str();
     assert(cstr);
     print(cstr);
+}
+
+inline void print(bool a) {
+    a ? print("true") : print("false");
 }
 
 // 打印数组
@@ -98,6 +104,11 @@ inline void println(unsigned int a) {
 }
 
 inline void println(double a) {
+    print(a);
+    printLine();
+}
+
+inline void println(bool a) {
     print(a);
     printLine();
 }
